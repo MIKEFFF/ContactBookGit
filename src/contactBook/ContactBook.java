@@ -101,4 +101,23 @@ public class ContactBook {
         }
         return null;
     }
+
+    public boolean existRepeatedPhones() {
+        int phoneI;
+        String nameI;
+
+        for(int i=0; i < counter; i++){
+            if(contacts[i] == null)
+                continue;
+            phoneI = contacts[i].getPhone();
+            nameI = contacts[i].getName();
+            for(int j=i+1; j < counter; j++){
+                if(contacts[j] == null)
+                    continue;
+                if(contacts[j].getPhone() == phoneI && !contacts[j].getName().equals(nameI))
+                    return true;
+            }
+        }
+        return false;
+    }
 }

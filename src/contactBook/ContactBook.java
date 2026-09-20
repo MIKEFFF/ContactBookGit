@@ -20,6 +20,7 @@ public class ContactBook {
         return searchIndex(name) >= 0;
     }
 
+
     public int getNumberOfContacts() {
         return counter;
     }
@@ -74,9 +75,8 @@ public class ContactBook {
     }
 
     private void resize() {
-        Contact tmp[] = new Contact[2*contacts.length];
-        for (int i=0;i<counter; i++)
-            tmp[i] = contacts[i];
+        Contact[] tmp = new Contact[2*contacts.length];
+        if (counter >= 0) System.arraycopy(contacts, 0, tmp, 0, counter);
         contacts = tmp;
     }
 
@@ -93,4 +93,12 @@ public class ContactBook {
         return contacts[currentContact++];
     }
 
+    public String getName(int number){
+        for(int i = 0; i < counter; i++){
+            if(contacts[i].getPhone() == number){
+                return contacts[i].getName();
+            }
+        }
+        return null;
+    }
 }

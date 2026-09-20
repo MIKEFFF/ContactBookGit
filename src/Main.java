@@ -15,6 +15,7 @@ public class Main {
     public static final String LIST_CONTACTS  = "LC";
     public static final String QUIT           = "Q";
     public static final String GET_CONTACT    = "GN";
+    public static final String CHECK_SAME_NUMBERS = "EP";
 
 
 
@@ -28,6 +29,8 @@ public class Main {
     public static final String QUIT_MSG = "Goodbye!";
     public static final String COMMAND_ERROR = "Unknown command.";
     public static final String CONTACT_NOT_FOUND = "Phone number does not exist.";
+    public static final String SAME_NUMBERS = "There are contacts that share phone numbers.";
+    public static final String DIFFERENT_NUMBERS = "All contacts have different phone numbers.";
 
     public static void main(String[] args) {
         Scanner in = new Scanner(System.in);
@@ -60,6 +63,9 @@ public class Main {
                 case GET_CONTACT:
                     getContact(in,cBook);
                     break;
+                case CHECK_SAME_NUMBERS:
+                    check_numbers(cBook);
+                    break;
                 default:
                     System.out.println(COMMAND_ERROR);
             }
@@ -70,7 +76,11 @@ public class Main {
         System.out.println();
         in.close();
     }
-
+    private static void check_numbers (ContactBook cBook){
+        if (cBook.existRepeatedPhones()) {
+            System.out.println(SAME_NUMBERS);
+        } else System.out.println(DIFFERENT_NUMBERS);
+    }
     private static void getContact(Scanner in, ContactBook cBook) {
         int phone;
         String name;
